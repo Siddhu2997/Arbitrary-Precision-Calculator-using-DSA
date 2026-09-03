@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	if(argc == 4)
 	{
-		const char str[]={'+','-','/','x','X'};
+		const char *str = "+-/xX";
 
 		int op1_flag=0, op2_flag =0;
 
@@ -61,10 +61,12 @@ int main(int argc, char **argv)
 
 					//printing the list
 					printf("First operand: ");
-					print_list(&head1);
+					print_list(head1);
 					
 					printf("Second operand: ");
-					print_list(&head2);
+					print_list(head2);
+
+					return 0;
 				}
 			}
 			printf("Please enter a valid operator(+, -, /, x, X)\n");
@@ -96,7 +98,7 @@ int op1_list_creation(op1_list **head1, op1_list **tail1, char **argv)
 		//case 1:when the list is empty
 		if(*head1 == NULL)
 		{
-			new->data = atoi(argv[1][i]);
+			new->data = argv[1][i]-'0';
 
 			new->prev = NULL;
 
@@ -108,7 +110,7 @@ int op1_list_creation(op1_list **head1, op1_list **tail1, char **argv)
 		}
 		else
 		{
-			new->data = atoi(argv[1][i]);
+			new->data = argv[1][i]-'0';
 
 			new->next = (*tail1)->next;
 
@@ -138,7 +140,7 @@ int op2_list_creation(op2_list **head2, op2_list **tail2, char **argv)
 		//case 1:when the list is empty
 		if(*head2 == NULL)
 		{
-			new->data = atoi(argv[3][i]);
+			new->data = argv[3][i]-'0';
 
 			new->prev = NULL;
 
@@ -150,7 +152,7 @@ int op2_list_creation(op2_list **head2, op2_list **tail2, char **argv)
 		}
 		else
 		{
-			new->data = atoi(argv[3][i]);
+			new->data = argv[3][i]-'0';
 
 			new->next = (*tail2)->next;
 
