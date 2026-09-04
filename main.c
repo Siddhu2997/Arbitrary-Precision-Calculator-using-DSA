@@ -16,6 +16,10 @@ int main(int argc, char **argv)
 	/*creating head2 & tail2 pointer for storing the starting and tail node address of operand2*/
 	oprnd_list *head2 = NULL;
 	oprnd_list *tail2 = NULL;
+	
+	/*creating res_head & res_tail pointer for storing the starting  and tail node address of result*/
+	oprnd_list *res_head = NULL;
+	oprnd_list *res_tail = NULL;
 
 	/*checking whether the user entered 4 arguments 1-> ./a.out 2-> 123 3-> + 4->1234 */
 	if(argc == 4)
@@ -36,6 +40,14 @@ int main(int argc, char **argv)
 						
 				printf("Second operand: ");
 				print_list(head2);
+				
+				/*if the operator is + then calling the add_operation function by passing the tail pointers of the two operands list and tail pointer of result list*/
+				if(*(argv[2]) == '+')
+				{
+					/*calling the add_operation*/
+					if(add_operation(&tail1, &tail2, &res_head, &res_tail))
+					printf(print_list(res_head);
+				}
 
 				return 0;
 			}

@@ -21,3 +21,6 @@ int oprnd_list_creation(oprnd_list **head, oprnd_list **tail, char *);
 
 //protoype of print_list function collecting the head pointer of the list that needs to be printed
 void print_list(oprnd_list *head);
+
+//prototype of the add function
+int add_operation(oprnd_list **tail1, oprnd_list **tail2, oprnd_list **res_head, oprnd_list **res_tail);
