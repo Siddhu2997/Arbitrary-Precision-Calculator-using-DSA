@@ -2,43 +2,54 @@
 #include<stdlib.h>
 #include"list.h"
 
-int add_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **res_tail)
+int sub_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **res_tail)
 {
-	printf("Add function called\n");
+	printf("Subtraction function called\n");
 	
-	/*carry variable to store the carry when the addition result is > than 9*/
-	/*result variable to store the result after performing addition operation on nodes of operand 1 and operand 2 and carry*/
-	int carry = 0, result;
+	int borrow = 0, result, borrow_flag=0;
 	
-	/*temp pointers to traverse the operands*/
-	D_list *temp1 = *tail1;
-	D_list *temp2 = *tail2;
+	D_list *temp1;
+	D_list *temp2;
+	
+	//comparing the list, which list has more digits
+	if(compare_list(*tail1, *tail2) == 1)
+	{
+		/*temp pointers to traverse the operands*/
+		temp1 = *tail1;
+		temp2 = *tail2;
+	}
+	else
+	{
+		temp1 = *tail2;
+		temp2 = *tail1;
+	}
 	
 	/*traversing the operands untill both operands reaching NULL*/
 	while(temp1 != NULL || temp2 != NULL)
 	{
-		
+		if(borrow_flag)
+		{
+			temp1->data = temp1->data - 1;
+			borrow_flag = 0;
+		}
 		/*first operand reached null and second operand not*/
 		if(temp1 == NULL && temp2 != NULL)
 		{
 			/*making the first operand head node as zero and adding */
-			result = 0 + temp2->data + carry;
+			result = 0 - temp2->data + borrow;
 		}
 		
 		/*second operand rached null and first operand not*/
 		else if(temp1 != NULL && temp2 == NULL)
 		{
 			/*making the second operand head node as zero and adding*/
-			result = temp1->data + 0 + carry;
+			result = temp1->data - 0 + borrow;
 		}
 		else
 		{
 			/*adding when either didnt reach the NULL*/
-			result = temp1->data + temp2->data + carry;
+			result = temp1->data - temp2->data + borrow;
 		}
-		/*reinitializing carry at each iteration*/
-		carry = 0;
-		
 		/*creating new result node*/
 		D_list *new = malloc(sizeof(D_list));
 		
@@ -48,10 +59,12 @@ int add_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **re
 		}
 		
 		/*reuslt is greater than 9 then storing only the last digit of the result*/
-		if(result > 9)
+		if(result < 0)
 		{
-			new->data = result - 10;
-			carry++;
+			borrow = 10;
+			new->data = result + borrow;
+			borrow_flag = 1;
+			borrow = 0;
 		}
 		else
 		{
@@ -84,34 +97,7 @@ int add_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **re
 		
 		if(temp2 != NULL)
 		temp2 = temp2->prev;
-		//printf("2\n");
-	}
-	/*if the carry is still 1 then creating a new node to store the carry in the result list*/
-	if(carry)
-	{
-		D_list *new = malloc(sizeof(D_list));
-		
-		if(new == NULL)
-		{
-			printf("Result list not created\n");
-		}
-		
-		new->data = carry;
-		
-		new->next = *res_head;
 
-		new->prev = (*res_head)->prev;
-		
-		(*res_head)->prev = new;
-		
-		*res_head = new;
 	}
-	
 	return SUCCESSFULL;
 }
-
-		
-		
-		
-	
-	

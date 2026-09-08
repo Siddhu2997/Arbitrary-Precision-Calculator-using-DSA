@@ -1,15 +1,16 @@
 #include<stdio.h>
 #include "list.h"
 
-void print_list(oprnd_list *head)
+void print_list(D_list *head)
 {
+	
 	/* Cheking the list is empty or not */
 	if (head == NULL)
 	{
 		printf("INFO : List is empty\n");
 	}
 	else
-	{
+	{	
 	    printf("Head -> ");
 	    while (head)		
 	    {
