@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include "list.h"
 
-void print_list(D_list *head)
+void print_list(D_list *head, D_list *tail)
 {
 	
 	/* Cheking the list is empty or not */
