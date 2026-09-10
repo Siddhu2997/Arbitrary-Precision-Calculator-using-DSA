@@ -156,21 +156,29 @@ int compare_list(D_list *tail1, D_list *tail2)
 	int list1_count = 0;
 	int list2_count = 0;
 	
-	while(tail1 != NULL)
+	while(tail1->prev != NULL)
 	{
 		list1_count++;
 		tail1 = tail1->prev;
 	}
-	while(tail2 != NULL)
+	while(tail2->prev != NULL)
 	{
 		list2_count++;
 		tail2 = tail2->prev;
 	}
 	printf("Operand 1 count = %d\n",list1_count);
 	printf("Operand 2 count = %d\n", list2_count);
-	if(list1_count > list2_count)
-		return 1;
+	
+	if(list1_count == list2_count)
+	{
+		if(tail1->data > tail2->data)
+			return LARGE;
+		else
+			return SMALL;
+	}
+	else if(list1_count > list2_count)
+		return LARGE;
 	else
-		return 2;
+		return SMALL;
 }
 	

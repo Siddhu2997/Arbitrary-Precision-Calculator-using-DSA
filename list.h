@@ -2,6 +2,10 @@
 #define SUCCESSFULL 1;
 #define FAILURE 0;
 
+#define LARGE 1;
+#define SMALL 2;
+
+
 //structure to create a doubly linked list 
 typedef struct node
 {
@@ -14,7 +18,7 @@ typedef struct node
 }D_list;
 
 //prototype of validation function collecting argv
-int validation(char **);
+int valid_number(char **);
 
 //prototype of oprnd_list_creation function, collecting head, tail pointers and argv
 int oprnd_list_creation(D_list **head, D_list **tail, char *);
@@ -30,6 +34,9 @@ int sub_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **re
 
 //prototype of the multiplication function
 int multi_operation(D_list **, D_list **, D_list **, D_list **, D_list **, D_list **, D_list **, D_list **);
+
+//prototype of division operation
+int divide_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **res_tail);
 
 //insert first operation
 int insert_first(D_list **head, D_list **tail, int data);

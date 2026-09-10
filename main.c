@@ -7,6 +7,81 @@
 
 int main(int argc, char **argv)
 {
+	int res, operand1flag = 0, operand2flag = 0;  // Result and operand sign flags
+    int opr1sign = plus , opr2sign = plus;  // Operand signs (default positive)
+    int flag  = 0;  // General flag for various purposes
+	
+	/*checking whether the user entered 4 arguments 1-> ./a.out 2-> 123 3-> + 4->1234 */
+	if(argc <= 3)
+	{
+		/* calling the validation function by passing argv */
+		if(valid_number(argv[1]))
+		{
+			printf("Operand1 Validation Successfull\n");
+			
+			if(valid_number(argv[3]))
+			{
+				printf("Operand2 validation Successfull\n");
+				
+				if(!(isdigit(argv[1][0])))
+				{
+					if(argv[1][0] == '+' || argv[1][0] == '-')
+					{
+						operand1flag = 1;  // Set flag indicating operand has explicit sign
+						if(argv[1][0] == '+')  // Positive sign
+						{
+							opr1sign = PLUS;  // Set operand 1 sign to plus
+						}
+						else  // Negative sign
+						{
+							opr1sign = PLUS;  // Set operand 1 sign to minus
+						}
+					}
+					else
+					{
+						printf("Error: Starting of the operand 1 should be a digit or + or - only\n");
+						return 0;
+					}
+				}
+				if(!(isdigit(argv[3][0])))
+				{
+					if(argv[3][0] == '+' || argv[3][0] == '-')
+					{
+						operand2flag = 1;  // Set flag indicating operand has explicit sign
+						if(argv[3][0] == '+')  // Positive sign
+						{
+							opr2sign = plus;  // Set operand 2 sign to plus
+						}
+						else  // Negative sign
+						{
+							opr2sign = minus;  // Set operand 2 sign to minus
+						}
+					}
+					else  // Invalid starting character
+					{
+						printf("Error: Starting of the operand 2 should be a digit or + or - only\n");
+						return 0;
+					}
+				}
+			}
+			else
+			{
+				printf("Error: Operand 2 validation failed\n");
+				return 0;
+			}
+        }
+		else
+		{
+			printf("Error: Operand 1 validation failed\n");
+			return 0;
+		}		
+	}
+	else
+	{
+		printf("Error: Insufficient Arguments passed\n");
+		return FAILURE;
+	}
+	
 	/*creating the head and tail struct pointer*/
 	
 	/*creating head1 & tail1 pointer for storing the starting and tail node address of operand1*/
@@ -20,67 +95,6 @@ int main(int argc, char **argv)
 	/*creating res_head & res_tail pointer for storing the starting  and tail node address of result*/
 	D_list *res_head = NULL;
 	D_list *res_tail = NULL;
-	
-	/*creating R1 and R2 list to store the result */
-	D_list *R1_head = NULL;
-	D_list *R1_tail = NULL;
-		
-	D_list *R2_head = NULL;
-	D_list *R2_tail = NULL;
-
-	/*checking whether the user entered 4 arguments 1-> ./a.out 2-> 123 3-> + 4->1234 */
-	if(argc == 4)
-	{
-		/* calling the validation function by passing argv */
-		if(validation(argv))
-		{
-			printf("Validation Successfull\n");
-			
-			/*passing the head and tail pointers of both list to oprnd_list_creation function to create two list*/
-			if(oprnd_list_creation(&head1, &tail1, argv[1]) && oprnd_list_creation(&head2, &tail2, argv[3]))
-			{
-				printf("Both operands list created successfully\n");
-
-				/* printing the list by calling print_list function and passing the head pointers of both list */
-				print_list(head1);
-			
-				print_list(head2);
-				
-				/*if the operator is + then calling the add_operation function by passing the tail pointers of the two operands list and tail pointer of result list*/
-				if(*(argv[2]) == '+')
-				{
-					/*calling the add_operation*/
-					if(add_operation(&tail1, &tail2, &res_head, &res_tail))
-					print_list(res_head);
-				}
-				else if(*(argv[2]) == '-')
-				{
-					/*calling sub_operation fucntion*/
-					if(sub_operation(&tail1, &tail2, &res_head, &res_tail))
-					print_list(res_head);
-				}
-				/*if the operator is x or X calling multiplication operation function*/
-				else if(*(argv[2]) == 'x' || *(argv[2]) == 'X')
-				{
-					
-					/*calling the multi_operation*/
-					if(multi_operation(&tail1, &tail2, &res_head, &res_tail, &R1_head, &R1_tail, &R2_head, &R2_tail))
-					print_list(res_head);
-				}
-				return 0;
-			}
-		}
-		else 
-		{
-			printf("Validation Failed\n");
-			return FAILURE;
-		}		
-	}
-	else
-	{
-		printf("Insufficient arguments\n");
-		return FAILURE;
-	}
 }
 
 
