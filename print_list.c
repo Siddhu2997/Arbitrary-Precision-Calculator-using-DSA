@@ -3,9 +3,16 @@
 
 void print_list(D_list *head, D_list *tail)
 {
+	while(head != NULL)  // Traverse the list from head to end
+    {
+        printf("%d",head -> data);  	// Print current node's data
+        head = head -> next;  			// Move to next node
+    }
+    printf("\n");
+}
 	
-	/* Cheking the list is empty or not */
-	if (head == NULL)
+	
+	/*if (head == NULL)
 	{
 		printf("INFO : List is empty\n");
 	}
@@ -14,14 +21,12 @@ void print_list(D_list *head, D_list *tail)
 	    printf("Head -> ");
 	    while (head)		
 	    {
-		    /* Printing the list */
+		   
 		    printf("%d <-", head -> data);
 
-		    /* Travering in forward direction */
 		    head = head -> next;
 		    if (head)
 		        printf("> ");
 	    }
     	printf(" Tail\n");
-    }
-}
+    }*/

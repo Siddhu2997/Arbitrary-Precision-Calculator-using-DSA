@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include"list.h"
 
-int sub_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **res_tail)
+int sub_operation(int opr1len, int opr2len, D_list **head1, D_list **tail1, D_list **head2, D_list **tail2, D_list **res_head, D_list **res_tail, int div_flag, int *flag)
 {
 	 D_list *temp1 = *tail1,*temp2 = *tail2;  // Pointers to traverse operands from LSD
     
@@ -17,17 +17,21 @@ int sub_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **re
     {
         int d1 = temp1 ? temp1 -> data : 0;  // Get digit from first operand or 0 if none
         int d2 = temp2 ? temp2 -> data : 0;  // Get digit from second operand or 0 if none
-        d1 -= borrow;  // Subtract any borrow from previous step
+        
+		d1 -= borrow;  // Subtract any borrow from previous step
         borrow = 0;  // Reset borrow flag
-        if(d1 < d2)  // Need to borrow
+        
+		if(d1 < d2)  // Need to borrow
         {
             d1 += 10;  // Borrow 10 from next higher digit
             borrow = 1;  // Set borrow flag for next iteration
         }
         result = d1 - d2;  // Compute subtraction result
-        if(temp1) temp1 = temp1 -> prev;  // Move to next more significant digit in first operand
+        
+		if(temp1) temp1 = temp1 -> prev;  // Move to next more significant digit in first operand
         if(temp2) temp2 = temp2 -> prev;  // Move to next more significant digit in second operand
-        insert_at_first(res_head, res_tail, result);  // Insert result digit at beginning of result list
+        
+		insert_first(res_head, res_tail, result);  // Insert result digit at beginning of result list
     }
     clear_leading_zero(res_head, res_tail);  // Remove any leading zeros from result
 	

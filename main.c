@@ -8,11 +8,11 @@
 int main(int argc, char **argv)
 {
 	int res, operand1flag = 0, operand2flag = 0;  // Result and operand sign flags
-    int opr1sign = plus , opr2sign = plus;  // Operand signs (default positive)
+    int opr1sign = PLUS , opr2sign = PLUS;  // Operand signs (default positive)
     int flag  = 0;  // General flag for various purposes
 	
 	/*checking whether the user entered 4 arguments 1-> ./a.out 2-> 123 3-> + 4->1234 */
-	if(argc <= 3)
+	if(argc > 3)
 	{
 		/* calling the validation function by passing argv */
 		if(valid_number(argv[1]))
@@ -50,11 +50,11 @@ int main(int argc, char **argv)
 						operand2flag = 1;  // Set flag indicating operand has explicit sign
 						if(argv[3][0] == '+')  // Positive sign
 						{
-							opr2sign = plus;  // Set operand 2 sign to plus
+							opr2sign = PLUS;  // Set operand 2 sign to plus
 						}
 						else  // Negative sign
 						{
-							opr2sign = minus;  // Set operand 2 sign to minus
+							opr2sign = MINUS;  // Set operand 2 sign to minus
 						}
 					}
 					else  // Invalid starting character
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
         oprlen1--;  // Adjust length to exclude sign character
         while(oprlen1 >= 0)  // Process remaining characters
         {
-            insert_at_last(argv[1][i],&head1, &tail1);  // Insert digit at end of list
+            insert_last(argv[1][i],&head1, &tail1);  // Insert digit at end of list
             i++;  // Move to next character
             oprlen1--;  // Decrement counter
         }
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
     {
         while(oprlen1 >= 0)  // Process all characters
         {
-            store_in_list(argv[1][oprlen1],&head1, &tail1);  // Insert digit at beginning of list
+            oprnd_list_creation(argv[1][oprlen1],&head1, &tail1);  // Insert digit at beginning of list
             oprlen1--;  // Decrement counter
         }
     }
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
         oprlen2--;  // Adjust length to exclude sign character
         while(oprlen2 >= 0)  // Process remaining characters
         {
-            insert_at_last(argv[3][i],&head2, &tail2);  // Insert digit at end of list
+            insert_last(argv[3][i],&head2, &tail2);  // Insert digit at end of list
             i++;  // Move to next character
             oprlen2--;  // Decrement counter
         }
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
     {
         while(oprlen2 >= 0)  // Process all characters
         {
-            store_in_list(argv[3][oprlen2],&head2, &tail2);  // Insert digit at beginning of list
+            oprnd_list_creation(argv[3][oprlen2],&head2, &tail2);  // Insert digit at beginning of list
             oprlen2--;  // Decrement counter
         }
     }
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
             print_list(res_head, res_tail);  // Print result
             break;  // Exit switch
         }
-        case '/':  // Division case
+        /*case '/':  // Division case
         {
             res = divide_operation(oprlen1, oprlen2, &head1, &tail1, &head2, &tail2, &res_head, &res_tail);  // Call division function
            
@@ -223,7 +223,7 @@ int main(int argc, char **argv)
                 printf("%d\n",res);  // Print integer quotient
             }
             break;
-        }
+        }*/
         default:
         {
             printf("Error: Enter proper operator\n");
