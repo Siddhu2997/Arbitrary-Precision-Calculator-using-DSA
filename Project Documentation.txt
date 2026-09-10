@@ -1,0 +1,26 @@
+=============================================================================Arbitrary Precision Calculator======================================================================================
+|																								|		
+|	Name: siddharthan L																						|
+|																								|
+|	Project Start date: 03 / 09 / 2026																				|
+|																								|		
+|	Project End date: 10 / 09 / 2026																				|		
+|																								|			
+|	Project Description:																						|					
+|	->The APC (Arbitrary Precision Calculator) project implements a high-precision arithmetic calculator using doubly linked lists to handle numbers of unlimited size.			|
+|																								|			
+|	->It processes command-line input to perform addition, subtraction, multiplication, and division while managing operand signs and validation. The program stores digits in reverse	|
+|																								|
+|	->order within linked lists for efficient mathematical operations from least to most significant digit. 										|
+|																								|
+|	->It includes comprehensive error handling for invalid inputs, operators, and edge cases like division by zero. 									|
+|																								|
+|	->The modular design separates input validation, number storage, arithmetic operations, and result display for maintainability. 							|
+|																								|
+|	Sample input:																							|	
+|		./a.out 125 / 5																						|	
+|																								|			
+|	Sample output:																							|			
+|		The result is -> 25																					|	
+|																								|
+=================================================================================================================================================================================================
