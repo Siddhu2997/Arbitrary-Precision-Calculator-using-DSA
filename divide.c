@@ -55,7 +55,7 @@ int greater(D_list *res_head,D_list *headr2)  // Function to compare two numbers
 
 /*-------------------------------------------------------division function------------------------------------------------------------------------*/
 
-int division(int opr1len, int opr2len, D_list ** head1, D_list **tail1, D_list ** head2, D_list **tail2, D_list **res_head ,D_list **res_tail)
+int divide_operation(int opr1len, int opr2len, D_list ** head1, D_list **tail1, D_list ** head2, D_list **tail2, D_list **res_head ,D_list **res_tail)
 {
     D_list *headr1 = NULL, *tailr1 = NULL;  // Intermediate result list pointers
     int count = 0;  // Quotient counter
@@ -73,5 +73,26 @@ int division(int opr1len, int opr2len, D_list ** head1, D_list **tail1, D_list *
         return 0;
     }
     sub_operation(opr1len, opr2len, head1, tail1, head2, tail2, res_head, res_tail, 1,NULL);  // First subtraction
-    
+    count++;  // Increment quotient counter
+    while(*res_head != NULL && ((*res_head) -> data > 0 || (*res_head) -> next != NULL))  // Continue while remainder is positive
+    {
+        //printf("hi\n");
+        delete_list(&headr1, &tailr1);  // Clean up previous intermediate result
+        
+        headr1 = *res_head;  // Assign remainder to intermediate result
+        tailr1 = *res_tail;  // Assign remainder tail
+        
+        *res_head = NULL;  // Reset remainder pointer
+        *res_tail = NULL;  // Reset remainder tail pointer
+        if(greater(headr1, *head2))  // Check if remainder is greater than divisor
+        {    
+            sub_operation(opr1len, opr2len, &headr1, &tailr1, head2, tail2, res_head, res_tail, 1,NULL);  // Subtract divisor from remainder
+        }
+        else  // Remainder is less than divisor
+        {
+            break;  // Exit loop
+        }
+        count++;  // Increment quotient counter
+    }
+    return count;  // Return final quotient
 }

@@ -4,7 +4,7 @@
 
 int add_operation(D_list **tail1, D_list **tail2, D_list **res_head, D_list **res_tail)
 {
-	printf("Add function called\n");
+	//printf("Add function called\n");
 	
 	/*carry variable to store the carry when the addition result is > than 9*/
 	/*result variable to store the result after performing addition operation on nodes of operand 1 and operand 2 and carry*/

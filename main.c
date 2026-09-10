@@ -17,11 +17,11 @@ int main(int argc, char **argv)
 		/* calling the validation function by passing argv */
 		if(valid_number(argv[1]))
 		{
-			printf("Operand1 Validation Successfull\n");
+			//printf("Operand1 Validation Successfull\n");
 			
 			if(valid_number(argv[3]))
 			{
-				printf("Operand2 validation Successfull\n");
+				//printf("Operand2 validation Successfull\n");
 				
 				if(!(isdigit(argv[1][0])))
 				{
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 						}
 						else  // Negative sign
 						{
-							opr1sign = PLUS;  // Set operand 1 sign to minus
+							opr1sign = MINUS;  // Set operand 1 sign to minus
 						}
 					}
 					else
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
             print_list(res_head, res_tail);  // Print result
             break;  // Exit switch
         }
-        /*case '/':  // Division case
+        case '/':  // Division case
         {
             res = divide_operation(oprlen1, oprlen2, &head1, &tail1, &head2, &tail2, &res_head, &res_tail);  // Call division function
            
@@ -223,11 +223,11 @@ int main(int argc, char **argv)
                 printf("%d\n",res);  // Print integer quotient
             }
             break;
-        }*/
+        }
         default:
         {
             printf("Error: Enter proper operator\n");
-            break;  // Exit switch
+            break;  
         }
     }
 }
